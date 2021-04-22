@@ -1,0 +1,918 @@
+{
+	"description": "smartrural",
+	"name": "Smart Rural Colmena",
+	"properties": {
+		"background_image": "https://cdn.pixabay.com/photo/2018/07/22/13/12/sunflower-3554567_1280.jpg",
+		"border_radius": "6",
+		"columns": 8,
+		"hide_header": true,
+		"row_height": 40,
+		"show_template": false
+	},
+	"tabs": [
+		{
+			"icon": "fas fa-tachometer-alt",
+			"name": "smartruralcolmena",
+			"widgets": [
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": [
+								"temperatura_ext",
+								"temperatura_int"
+							],
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 1,
+						"row": 19,
+						"sizeX": 5,
+						"sizeY": 6
+					},
+					"panel": {
+						"color": "#030303",
+						"showFullscreen": true,
+						"showTs": true,
+						"title": "Temperaturas"
+					},
+					"properties": {
+						"axis": true,
+						"color": {
+							"temperatura_ext": "#17e83a",
+							"temperatura_int": "#067ccb"
+						},
+						"decimal_places": 2,
+						"fill": false,
+						"gradient": true,
+						"icon": "",
+						"iconSize": "",
+						"legend": true,
+						"majorTicks": 10,
+						"max": 100,
+						"min": 0,
+						"multiple_axes": false,
+						"plateColor": "#ffffff",
+						"showValue": true,
+						"size": "75px",
+						"step": 1,
+						"textColor": "#1E313E",
+						"tickColor": "#000000",
+						"timespan": {
+							"beginTs": 1612310400000,
+							"endTs": 1612310400000,
+							"magnitude": "day",
+							"mode": "relative",
+							"period": "latest",
+							"value": 5
+						},
+						"unit_size": "20px",
+						"weight": "font-thin",
+						"xaxis": {
+							"ticks": 0
+						},
+						"yaxis": {
+							"max": 50,
+							"min": -10
+						}
+					},
+					"type": "chart"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": "bateria",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 1,
+						"row": 7,
+						"sizeX": 3,
+						"sizeY": 5
+					},
+					"panel": {
+						"color": "#000000",
+						"showTs": true,
+						"title": "Porcentaje Bateria"
+					},
+					"properties": {
+						"color": "#f11313",
+						"gradient": true,
+						"max": 100,
+						"min": 0,
+						"timespan": {
+							"mode": "latest"
+						}
+					},
+					"type": "gauge"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": [
+								"humedad_int"
+							],
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 1,
+						"row": 25,
+						"sizeX": 5,
+						"sizeY": 6
+					},
+					"panel": {
+						"color": "#030303",
+						"showFullscreen": true,
+						"showTs": true,
+						"title": "Humedad interior"
+					},
+					"properties": {
+						"axis": true,
+						"color": {
+							"humedad_int": "#f1f50a"
+						},
+						"fill": false,
+						"legend": true,
+						"multiple_axes": false,
+						"timespan": {
+							"magnitude": "day",
+							"mode": "relative",
+							"period": "latest",
+							"value": 5
+						},
+						"xaxis": {
+							"ticks": 0
+						},
+						"yaxis": {
+							"max": 100,
+							"min": 1
+						}
+					},
+					"type": "chart"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": "bateria",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 6,
+						"row": 34,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#030303",
+						"subtitle": "",
+						"title": "Bateria"
+					},
+					"properties": {
+						"axis": true,
+						"color": "#fafafa",
+						"decimal_places": 0,
+						"fill": false,
+						"icon": "",
+						"legend": false,
+						"multiple_axes": false,
+						"size": "40px",
+						"timespan": {
+							"magnitude": "minute",
+							"mode": "latest",
+							"value": 30
+						},
+						"unit": "%",
+						"unit_size": "20px",
+						"weight": "font-thin"
+					},
+					"type": "text"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": "temperatura_ext",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 6,
+						"row": 22,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#050505",
+						"showTs": true,
+						"subtitle": "",
+						"title": "Temperatura exterior"
+					},
+					"properties": {
+						"axis": true,
+						"color": "#17ee57",
+						"decimal_places": 2,
+						"fill": false,
+						"gradient": false,
+						"icon": "",
+						"iconSize": "",
+						"legend": false,
+						"majorTicks": 10,
+						"max": 50,
+						"min": -10,
+						"multiple_axes": false,
+						"plateColor": "#ffffff",
+						"showValue": true,
+						"size": "40px",
+						"step": 1,
+						"textColor": "#1E313E",
+						"tickColor": "#000000",
+						"timespan": {
+							"magnitude": "minute",
+							"mode": "latest",
+							"value": 30
+						},
+						"unit": "ºC",
+						"unit_size": "20px",
+						"weight": "font-thin"
+					},
+					"type": "text"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": "temperatura_int",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 6,
+						"row": 19,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#050505",
+						"showTs": true,
+						"subtitle": "",
+						"title": "Temperatura interior"
+					},
+					"properties": {
+						"axis": true,
+						"color": "#4417e8",
+						"decimal_places": 2,
+						"fill": false,
+						"gradient": true,
+						"icon": "",
+						"iconSize": "",
+						"legend": false,
+						"majorTicks": 10,
+						"max": 50,
+						"min": -10,
+						"multiple_axes": false,
+						"plateColor": "#ffffff",
+						"showValue": true,
+						"size": "40px",
+						"step": 1,
+						"textColor": "#1E313E",
+						"tickColor": "#000000",
+						"timespan": {
+							"magnitude": "minute",
+							"mode": "latest",
+							"value": 30
+						},
+						"unit": "ºC",
+						"unit_size": "20px",
+						"weight": "font-thin"
+					},
+					"type": "text"
+				},
+				{
+					"layout": {
+						"col": 4,
+						"row": 0,
+						"sizeX": 3,
+						"sizeY": 4
+					},
+					"panel": {
+						"color": "#030303",
+						"colors": [],
+						"showFullscreen": false,
+						"showTs": true,
+						"title": "Hora local"
+					},
+					"properties": {
+						"color": "#ff00e1",
+						"timezone": ""
+					},
+					"type": "clock"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": [
+								"peso",
+								"bateria"
+							],
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 1,
+						"row": 31,
+						"sizeX": 5,
+						"sizeY": 6
+					},
+					"panel": {
+						"color": "#030303",
+						"showFullscreen": true,
+						"showTs": true,
+						"title": "Peso y Bateria Colmena"
+					},
+					"properties": {
+						"axis": true,
+						"color": {
+							"bateria": "#fcfcfc",
+							"peso": "#ee6dbf",
+							"sonido": "#09e6f6"
+						},
+						"fill": false,
+						"legend": true,
+						"multiple_axes": false,
+						"timespan": {
+							"magnitude": "day",
+							"mode": "relative",
+							"period": "latest",
+							"value": 5
+						},
+						"xaxis": {
+							"ticks": ""
+						},
+						"yaxis": {
+							"max": 100,
+							"min": 1,
+							"ticks": ""
+						}
+					},
+					"type": "chart"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": "humedad_int",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 6,
+						"row": 25,
+						"sizeX": 1,
+						"sizeY": 6
+					},
+					"panel": {
+						"color": "#030303",
+						"subtitle": "",
+						"title": "Humedad interior"
+					},
+					"properties": {
+						"axis": true,
+						"color": "#e7f613",
+						"decimal_places": 2,
+						"fill": false,
+						"icon": "",
+						"legend": false,
+						"multiple_axes": false,
+						"size": "40px",
+						"timespan": {
+							"magnitude": "minute",
+							"mode": "latest",
+							"value": 30
+						},
+						"unit": "%",
+						"unit_size": "20px",
+						"weight": "font-thin"
+					},
+					"type": "text"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": "peso",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 4,
+						"row": 7,
+						"sizeX": 3,
+						"sizeY": 5
+					},
+					"panel": {
+						"color": "#080808",
+						"showTs": true,
+						"title": "Peso"
+					},
+					"properties": {
+						"color": "#fb2379",
+						"majorTicks": 5,
+						"max": 50,
+						"min": 0,
+						"plateColor": "#ffffff",
+						"showValue": true,
+						"textColor": "#1E313E",
+						"tickColor": "#000000",
+						"timespan": {
+							"mode": "latest"
+						},
+						"unit": "Kg"
+					},
+					"type": "tachometer"
+				},
+				{
+					"data": {
+						"source": "value",
+						"value": "Smart Rural Colmena"
+					},
+					"layout": {
+						"col": 1,
+						"row": 0,
+						"sizeX": 3,
+						"sizeY": 4
+					},
+					"panel": {
+						"color": "#000000",
+						"colors": [],
+						"showTs": false
+					},
+					"properties": {
+						"color": "#ffd505",
+						"decimal_places": 2,
+						"icon": "",
+						"size": "40px",
+						"unit_size": "20px",
+						"weight": "font-bold"
+					},
+					"type": "text"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": {
+								"latitude": "latitud",
+								"longitude": "longitud"
+							},
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 1,
+						"row": 12,
+						"sizeX": 3,
+						"sizeY": 7
+					},
+					"panel": {
+						"color": "#030303",
+						"title": "Coordenadas GPS por triangulación de antenas"
+					},
+					"properties": {
+						"center": true,
+						"hideControls": false,
+						"latitude": 0,
+						"longitude": 0,
+						"mapType": "roadmap",
+						"timespan": {
+							"mode": "latest"
+						},
+						"trackColor": "#3FFF00",
+						"waypoints": true,
+						"zoom": 14
+					},
+					"type": "map"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmenaGPS",
+							"mapping": {
+								"latitude": "latitud",
+								"longitude": "longitud"
+							},
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 4,
+						"row": 12,
+						"sizeX": 3,
+						"sizeY": 7
+					},
+					"panel": {
+						"color": "#030303",
+						"title": "Coordenadas GPS exactas"
+					},
+					"properties": {
+						"center": true,
+						"hideControls": false,
+						"latitude": 0,
+						"longitude": 0,
+						"mapType": "roadmap",
+						"timespan": {
+							"mode": "latest"
+						},
+						"trackColor": "#3FFF00",
+						"waypoints": true,
+						"zoom": 16
+					},
+					"type": "map"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": [
+								"sonido"
+							],
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 1,
+						"row": 37,
+						"sizeX": 5,
+						"sizeY": 5
+					},
+					"panel": {
+						"color": "#030303",
+						"showFullscreen": true,
+						"showTs": true,
+						"title": "Sonido interior"
+					},
+					"properties": {
+						"axis": true,
+						"color": {
+							"sonido": "#09e6f6"
+						},
+						"fill": false,
+						"legend": true,
+						"multiple_axes": false,
+						"timespan": {
+							"magnitude": "day",
+							"mode": "relative",
+							"period": "latest",
+							"value": 5
+						},
+						"xaxis": {
+							"ticks": 0
+						},
+						"yaxis": {
+							"max": 100,
+							"min": 1
+						}
+					},
+					"type": "chart"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": "sonido",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 6,
+						"row": 37,
+						"sizeX": 1,
+						"sizeY": 5
+					},
+					"panel": {
+						"color": "#030303",
+						"subtitle": "",
+						"title": "Sonido"
+					},
+					"properties": {
+						"axis": true,
+						"color": "#10f5f9",
+						"decimal_places": 2,
+						"fill": false,
+						"icon": "",
+						"legend": false,
+						"multiple_axes": false,
+						"size": "40px",
+						"timespan": {
+							"magnitude": "minute",
+							"mode": "latest",
+							"value": 30
+						},
+						"unit": "%",
+						"unit_size": "20px",
+						"weight": "font-thin"
+					},
+					"type": "text"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmenaLED",
+							"mapping": "peso",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 1,
+						"row": 4,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#080808",
+						"title": "Peso"
+					},
+					"properties": {
+						"color": "#080808",
+						"colors": [
+							{
+								"blink": false,
+								"color": "#e614f5",
+								"max": 255,
+								"min": 255
+							}
+						],
+						"size": "50px",
+						"style": "switch",
+						"timespan": {
+							"mode": "latest"
+						}
+					},
+					"type": "led"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmenaLED",
+							"mapping": "temperatura_int",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 5,
+						"row": 4,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#080808",
+						"title": "Temperatura interior"
+					},
+					"properties": {
+						"color": "#050505",
+						"colors": [
+							{
+								"blink": false,
+								"color": "#00ff00",
+								"max": 255,
+								"min": 255
+							}
+						],
+						"size": "50px",
+						"timespan": {
+							"mode": "latest"
+						}
+					},
+					"type": "led"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmenaLED",
+							"mapping": "temperatura_ext",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 6,
+						"row": 4,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#080808",
+						"title": "Temperatura exterior"
+					},
+					"properties": {
+						"color": "#030303",
+						"colors": [
+							{
+								"blink": false,
+								"color": "#490af5",
+								"max": 255,
+								"min": 255
+							}
+						],
+						"size": "50px",
+						"timespan": {
+							"mode": "latest"
+						}
+					},
+					"type": "led"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmenaLED",
+							"mapping": "humedad_int",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 4,
+						"row": 4,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#080808",
+						"title": "Humedad interior"
+					},
+					"properties": {
+						"color": "#0a0a0a",
+						"colors": [
+							{
+								"blink": false,
+								"color": "#f8fb13",
+								"max": 255,
+								"min": 255
+							}
+						],
+						"size": "50px",
+						"timespan": {
+							"mode": "latest"
+						}
+					},
+					"type": "led"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmenaLED",
+							"mapping": "sonido",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 2,
+						"row": 4,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#080808",
+						"title": "Sonido"
+					},
+					"properties": {
+						"color": "#0a0a0a",
+						"colors": [
+							{
+								"blink": false,
+								"color": "#0dd4f8",
+								"max": 255,
+								"min": 255
+							}
+						],
+						"size": "50px",
+						"timespan": {
+							"mode": "latest"
+						}
+					},
+					"type": "led"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmenaLED",
+							"mapping": "bateria",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 3,
+						"row": 4,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#080808",
+						"title": "Bateria"
+					},
+					"properties": {
+						"color": "#030303",
+						"colors": [
+							{
+								"blink": false,
+								"color": "#fb0408",
+								"max": 255,
+								"min": 255
+							}
+						],
+						"size": "50px",
+						"style": "switch",
+						"timespan": {
+							"mode": "latest"
+						}
+					},
+					"type": "led"
+				},
+				{
+					"data": {
+						"bucket": {
+							"backend": "dynamodb",
+							"id": "smartruralcolmena",
+							"mapping": "peso",
+							"user": "luisandrespg"
+						},
+						"source": "bucket"
+					},
+					"layout": {
+						"col": 6,
+						"row": 31,
+						"sizeX": 1,
+						"sizeY": 3
+					},
+					"panel": {
+						"color": "#030303",
+						"subtitle": "",
+						"title": "Peso"
+					},
+					"properties": {
+						"axis": true,
+						"color": "#f443aa",
+						"decimal_places": 2,
+						"fill": false,
+						"icon": "",
+						"legend": false,
+						"multiple_axes": false,
+						"size": "40px",
+						"timespan": {
+							"magnitude": "minute",
+							"mode": "latest",
+							"value": 30
+						},
+						"unit": "Kg",
+						"unit_size": "20px",
+						"weight": "font-thin"
+					},
+					"type": "text"
+				}
+			]
+		}
+	]
+}
