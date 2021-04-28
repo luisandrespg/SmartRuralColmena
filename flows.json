@@ -1,0 +1,971 @@
+[
+    {
+        "id": "64a7d0a7.28ef7",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "24b8395b.cfc456",
+        "type": "blynk-ws-in-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "accion",
+        "pin": "6",
+        "pin_all": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 130,
+        "y": 2660,
+        "wires": [
+            []
+        ],
+        "outputLabels": [
+            "accion"
+        ]
+    },
+    {
+        "id": "48e211f8.61ade",
+        "type": "http request",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://api.thinger.io/v1/users/luisandrespg/buckets/smartruralcolmena/data",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 830,
+        "y": 2660,
+        "wires": [
+            [
+                "451041a1.56696"
+            ]
+        ]
+    },
+    {
+        "id": "451041a1.56696",
+        "type": "debug",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "accion",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 2660,
+        "wires": []
+    },
+    {
+        "id": "3f2cd6a4.12e71a",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "datos modificados",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t    \"accion\" : accion\t    }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 2660,
+        "wires": [
+            [
+                "48e211f8.61ade"
+            ]
+        ]
+    },
+    {
+        "id": "76c36017.10b0c",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "accion",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 2660,
+        "wires": [
+            [
+                "3f2cd6a4.12e71a"
+            ]
+        ]
+    },
+    {
+        "id": "be558f11.195d",
+        "type": "inject",
+        "z": "64a7d0a7.28ef7",
+        "name": "timestamp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 280,
+        "wires": [
+            [
+                "18000666.3471ea",
+                "5d1f320f.c6bbdc",
+                "cbcb0ced.9c438"
+            ]
+        ]
+    },
+    {
+        "id": "18000666.3471ea",
+        "type": "http request",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://api.thinger.io/v1/users/luisandrespg/buckets/smartruralcolmena/data?items=1&sort=desc",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 430,
+        "y": 280,
+        "wires": [
+            [
+                "61cefb42.c744a4",
+                "32121313.eb824c",
+                "e7dadd67.a1681",
+                "e77c2d3d.9c39",
+                "9e4eefad.5ad62",
+                "22f0772b.9c4be8",
+                "da527fb1.d9d95"
+            ]
+        ]
+    },
+    {
+        "id": "1a886d7a.a0e5d3",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "Temperatura exterior",
+        "pin": "1",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 1020,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "da527fb1.d9d95",
+        "type": "debug",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "61cefb42.c744a4",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "temperatura exterior",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.temperatura_ext\t\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 120,
+        "wires": [
+            [
+                "1a886d7a.a0e5d3"
+            ]
+        ]
+    },
+    {
+        "id": "32121313.eb824c",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "temperatura interior",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.temperatura_int\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "32942cc3.5f46b4"
+            ]
+        ]
+    },
+    {
+        "id": "32942cc3.5f46b4",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "Temperatura interior",
+        "pin": "3",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 1020,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "668a7acc.b20024",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "bateria",
+        "pin": "2",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 970,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e7dadd67.a1681",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "bateria",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.bateria\t\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 260,
+        "wires": [
+            [
+                "668a7acc.b20024"
+            ]
+        ]
+    },
+    {
+        "id": "9e67163e.d17ae8",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "Humedad interior",
+        "pin": "0",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 1010,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "e77c2d3d.9c39",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "Humedad interior",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.humedad_int\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 320,
+        "wires": [
+            [
+                "9e67163e.d17ae8"
+            ]
+        ]
+    },
+    {
+        "id": "4bb58466.11521c",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "localizacion",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[\t    \"1\",\t    payload[0].val.latitud,\t    payload[0].val.longitud,\t    \"smart-colmena\"\t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 560,
+        "wires": [
+            [
+                "387dd5f.98bd02a"
+            ]
+        ]
+    },
+    {
+        "id": "387dd5f.98bd02a",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "Localización",
+        "pin": "4",
+        "pinmode": "0",
+        "client": "abc10bc8.9bbd68",
+        "x": 870,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "9e4eefad.5ad62",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "sonido",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.sonido\t\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 400,
+        "wires": [
+            [
+                "29e15d69.266152"
+            ]
+        ]
+    },
+    {
+        "id": "29e15d69.266152",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "sonido",
+        "pin": "7",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 930,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "22f0772b.9c4be8",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "peso",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.peso\t\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 460,
+        "wires": [
+            [
+                "7509eefc.bc788"
+            ]
+        ]
+    },
+    {
+        "id": "7509eefc.bc788",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "peso",
+        "pin": "8",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 930,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "c7bc5d20.c421c",
+        "type": "blynk-ws-in-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "accion",
+        "pin": "6",
+        "pin_all": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 150,
+        "y": 1200,
+        "wires": [
+            [
+                "9a4f0f9a.ab94e",
+                "89342c90.70bf5"
+            ]
+        ],
+        "outputLabels": [
+            "accion"
+        ]
+    },
+    {
+        "id": "dbdae2d3.0235e",
+        "type": "http request",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://api.thinger.io/v1/users/luisandrespg/buckets/smartruralcolmenaACCION/data",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 770,
+        "y": 1200,
+        "wires": [
+            [
+                "8cb73722.165668"
+            ]
+        ]
+    },
+    {
+        "id": "8cb73722.165668",
+        "type": "debug",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "9a4f0f9a.ab94e",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "accion",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": " {\t \"accion\": payload\t }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 1200,
+        "wires": [
+            [
+                "dbdae2d3.0235e"
+            ]
+        ]
+    },
+    {
+        "id": "5d1f320f.c6bbdc",
+        "type": "http request",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://api.thinger.io/v1/users/luisandrespg/buckets/smartruralcolmenaGPS/data?items=1&sort=desc",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 430,
+        "y": 560,
+        "wires": [
+            [
+                "4bb58466.11521c",
+                "8d41595d.916388"
+            ]
+        ]
+    },
+    {
+        "id": "cbcb0ced.9c438",
+        "type": "http request",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://api.thinger.io/v1/users/luisandrespg/buckets/smartruralcolmenaLED/data?items=1&sort=desc",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 430,
+        "y": 740,
+        "wires": [
+            [
+                "77589096.ad37e",
+                "eeec6c1e.3a3b5",
+                "a3014ac4.fca098",
+                "2f2d28f3.041798",
+                "cbf695fc.7ca118",
+                "6d0da6fe.6f9548"
+            ]
+        ]
+    },
+    {
+        "id": "77589096.ad37e",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "temperatura interior",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.temperatura_int\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 660,
+        "wires": [
+            [
+                "aa379a84.adde58"
+            ]
+        ]
+    },
+    {
+        "id": "aa379a84.adde58",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "Temperatura interior",
+        "pin": "10",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 1020,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "2fa296b5.85e37a",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "Humedad interior",
+        "pin": "12",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 1010,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "eeec6c1e.3a3b5",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "Humedad interior",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.humedad_int\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 740,
+        "wires": [
+            [
+                "2fa296b5.85e37a"
+            ]
+        ]
+    },
+    {
+        "id": "a3014ac4.fca098",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "sonido",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.sonido\t\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 820,
+        "wires": [
+            [
+                "f535eb71.bca0f8"
+            ]
+        ]
+    },
+    {
+        "id": "f535eb71.bca0f8",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "sonido",
+        "pin": "13",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 930,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "2f2d28f3.041798",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "peso",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.peso\t\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 880,
+        "wires": [
+            [
+                "1e4ea389.8dcb6c"
+            ]
+        ]
+    },
+    {
+        "id": "1e4ea389.8dcb6c",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "peso",
+        "pin": "9",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 930,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "89342c90.70bf5",
+        "type": "debug",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "f0319d26.7c898",
+        "type": "http request",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://api.thinger.io/v1/users/luisandrespg/buckets/smartruralcolmenaACCION/data?items=1&sort=desc",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 410,
+        "y": 1080,
+        "wires": [
+            [
+                "f347c3b4.4a988"
+            ]
+        ]
+    },
+    {
+        "id": "f347c3b4.4a988",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "GPS",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(payload[0].val.accion)*255\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 1080,
+        "wires": [
+            [
+                "5fd096ec.a02418",
+                "ed589621.0640f8"
+            ]
+        ]
+    },
+    {
+        "id": "5fd096ec.a02418",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "GPS",
+        "pin": "11",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 950,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "cbf695fc.7ca118",
+        "type": "change",
+        "z": "64a7d0a7.28ef7",
+        "name": "bateria",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].val.bateria\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 960,
+        "wires": [
+            [
+                "6bd23984.360ca8"
+            ]
+        ]
+    },
+    {
+        "id": "6bd23984.360ca8",
+        "type": "blynk-ws-out-write",
+        "z": "64a7d0a7.28ef7",
+        "name": "bateria",
+        "pin": "14",
+        "pinmode": 0,
+        "client": "abc10bc8.9bbd68",
+        "x": 930,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "d12b2fdc.efdfc",
+        "type": "inject",
+        "z": "64a7d0a7.28ef7",
+        "name": "timestamp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 1080,
+        "wires": [
+            [
+                "f0319d26.7c898"
+            ]
+        ]
+    },
+    {
+        "id": "8d41595d.916388",
+        "type": "debug",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "6d0da6fe.6f9548",
+        "type": "debug",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "ed589621.0640f8",
+        "type": "debug",
+        "z": "64a7d0a7.28ef7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "abc10bc8.9bbd68",
+        "type": "blynk-ws-client",
+        "name": "Smart-rural-colmena",
+        "path": "ws://blynk-cloud.com/websockets",
+        "key": "OrXbLCF7195tBs4C20_ipeQXXuOhbFT6",
+        "dbg_all": false,
+        "dbg_read": false,
+        "dbg_write": false,
+        "dbg_notify": false,
+        "dbg_mail": false,
+        "dbg_prop": false,
+        "dbg_sync": false,
+        "dbg_bridge": false,
+        "dbg_low": false,
+        "dbg_pins": "",
+        "multi_cmd": false,
+        "proxy_type": "no",
+        "proxy_url": "",
+        "enabled": true
+    }
+]
